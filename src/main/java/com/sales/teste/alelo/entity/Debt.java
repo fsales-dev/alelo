@@ -1,17 +1,38 @@
 package com.sales.teste.alelo.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.annotation.Generated;
 
+@Entity
 public class Debt {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	
 	private BigDecimal value;
 	
 	private String description;
 	
+	private LocalDate dueDate;
+
+	@Generated("SparkTools")
+	private Debt(Builder builder) {
+		this.id = builder.id;
+		this.value = builder.value;
+		this.description = builder.description;
+		this.dueDate = builder.dueDate;
+	}
+	
+	public Debt() {}
+
 	public UUID getId() {
 		return id;
 	}
@@ -36,15 +57,12 @@ public class Debt {
 		this.description = description;
 	}
 
-	public Debt() {
-		
+	public LocalDate getDueDate() {
+		return dueDate;
 	}
 
-	@Generated("SparkTools")
-	private Debt(Builder builder) {
-		this.id = builder.id;
-		this.value = builder.value;
-		this.description = builder.description;
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
 	}
 
 	/**
@@ -64,6 +82,7 @@ public class Debt {
 		private UUID id;
 		private BigDecimal value;
 		private String description;
+		private LocalDate dueDate;
 
 		private Builder() {
 		}
@@ -83,10 +102,16 @@ public class Debt {
 			return this;
 		}
 
+		public Builder withDueDate(LocalDate dueDate) {
+			this.dueDate = dueDate;
+			return this;
+		}
+
 		public Debt build() {
 			return new Debt(this);
 		}
 	}
+	
 	
 	
 }

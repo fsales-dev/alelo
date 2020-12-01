@@ -1,20 +1,33 @@
 package com.sales.teste.alelo.entity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Generated;
-import java.util.Collections;
 
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Person {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	
-	private String name;
+	private String legalName;
 	
 	private Integer age;
 	
+	@Enumerated(EnumType.STRING)
 	private PersonType personType;
 	
+	@OneToMany(mappedBy = "person")
 	private List<Debt> debts;
 
 	public Person() {}
@@ -22,7 +35,7 @@ public class Person {
 	@Generated("SparkTools")
 	private Person(Builder builder) {
 		this.id = builder.id;
-		this.name = builder.name;
+		this.legalName = builder.legalName;
 		this.age = builder.age;
 		this.personType = builder.personType;
 		this.debts = builder.debts;
@@ -36,12 +49,12 @@ public class Person {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getLegalName() {
+		return legalName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLegalName(String legalName) {
+		this.legalName = legalName;
 	}
 
 	public Integer getAge() {
@@ -83,7 +96,7 @@ public class Person {
 	@Generated("SparkTools")
 	public static final class Builder {
 		private UUID id;
-		private String name;
+		private String legalName;
 		private Integer age;
 		private PersonType personType;
 		private List<Debt> debts = Collections.emptyList();
@@ -96,8 +109,8 @@ public class Person {
 			return this;
 		}
 
-		public Builder withName(String name) {
-			this.name = name;
+		public Builder withLegalName(String legalName) {
+			this.legalName = legalName;
 			return this;
 		}
 
