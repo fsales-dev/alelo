@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.annotation.Generated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Debt {
@@ -22,6 +24,10 @@ public class Debt {
 	private String description;
 	
 	private LocalDate dueDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "id", insertable = false, updatable = false)
+	private Person person;
 
 	@Generated("SparkTools")
 	private Debt(Builder builder) {
